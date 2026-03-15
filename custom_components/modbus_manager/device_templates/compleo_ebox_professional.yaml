@@ -564,7 +564,7 @@ binary_sensors:
     availability: >-
       {{ not is_state('sensor.{PREFIX}_status', 'unavailable') }}
     state: >-
-      {{ is_state('sensor.{PREFIX}_status', 'B1') or is_state('sensor.{PREFIX}_status', 'B2') or is_state('sensor.{PREFIX}_status', 'C1') or is_state('sensor.{PREFIX}_status', 'C2')}}
+      {{ is_state('sensor.{PREFIX}_status', 'C1') }}
     device_class: "power"
     group: "EV_charging_status"
     icon: "mdi:ev-station"
