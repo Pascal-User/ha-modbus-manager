@@ -562,9 +562,9 @@ binary_sensors:
     unique_id: "charging_active"
     type: "binary_sensor"
     availability: >-
-      {{ not is_state('sensor.{PREFIX}_status', 'unavailable') }}
+      {{ not is_state('sensor.{PREFIX}_charging_power', 'unavailable') }}
     state: >-
-      {{ is_state('sensor.{PREFIX}_status', 'C1') }}
+      {{ states('sensor.{PREFIX}_charging_power') | float(0) > 0 }}
     device_class: "power"
     group: "EV_charging_status"
     icon: "mdi:ev-station"
