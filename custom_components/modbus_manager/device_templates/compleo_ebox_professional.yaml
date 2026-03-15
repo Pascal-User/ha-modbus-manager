@@ -447,7 +447,7 @@ calculated:
       {% set current1 = states('sensor.{PREFIX}_current_phase_1') | float(0) %}
       {% set current2 = states('sensor.{PREFIX}_current_phase_2') | float(0) %}
       {% set current3 = states('sensor.{PREFIX}_current_phase_3') | float(0) %}
-      {% if current1 > 0.11 or current2 > 0.11 or current3 > 0.11 %}
+      {% if current1 > 1 or current2 > 1 or current3 > 1 %}
         {{ ((current1 + current2 + current3) - 0.27) * 230 | round(0) }}
       {% else %}
         0
