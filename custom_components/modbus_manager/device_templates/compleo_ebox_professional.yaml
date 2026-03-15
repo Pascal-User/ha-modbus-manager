@@ -447,7 +447,7 @@ calculated:
       {% set current1 = states('sensor.{PREFIX}_current_phase_1') | float(0) %}
       {% set current2 = states('sensor.{PREFIX}_current_phase_2') | float(0) %}
       {% set current3 = states('sensor.{PREFIX}_current_phase_3') | float(0) %}
-      {% if current1 > 1 or current2 > 1 or current3 > 1 %}
+      {% if current1 > 0.11 or current2 > 0.11 or current3 > 0.11 %}
         {{ ((current1 + current2 + current3) - 0.27) * 230 | round(0) }}
       {% else %}
         0
@@ -562,9 +562,9 @@ binary_sensors:
     unique_id: "charging_active"
     type: "binary_sensor"
     availability: >-
-      {{ not is_state('sensor.{PREFIX}_charging_power', 'unavailable') }}
+      {{ not is_state('sensor.{PREFIX}_status', 'unavailable') }}
     state: >-
-      {{ states('sensor.{PREFIX}_charging_power') | float(0) > 0 }}
+      {{ is_state('sensor.{PREFIX}_status', 'B1') or is_state('sensor.{PREFIX}_status', 'B2') or is_state('sensor.{PREFIX}_status', 'C1') or is_state('sensor.{PREFIX}_status', 'C2')}}
     device_class: "power"
     group: "EV_charging_status"
     icon: "mdi:ev-station"
